@@ -10,7 +10,9 @@ import {
   Post,
   Put,
   Query,
+  ValidationPipe,
 } from '@nestjs/common';
+import { CreateUserDto } from './dtos/create-user-dto';
 
 @Controller('users')
 export class UsersController {
@@ -28,8 +30,10 @@ export class UsersController {
   }
 
   @Post()
-  public createUser(@Body() body: any): string {
-    console.log('body', body);
+  public createUser(
+    @Body(new ValidationPipe()) createUserDto: CreateUserDto,
+  ): string {
+    console.log('createUserDto:', createUserDto);
     return 'Create User Request';
   }
 
