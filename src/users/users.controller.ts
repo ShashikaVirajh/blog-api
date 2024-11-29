@@ -11,20 +11,19 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { CreateUserDto } from './dtos/create-user-dto';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersParamDto } from './dtos/get-users-param.dto';
+import { PatchUserDto } from './dtos/patch-user.dto';
 
 @Controller('users')
 export class UsersController {
   @Get('/:id?')
   public getUsers(
-    @Param('id', ParseIntPipe) id: number | undefined,
+    @Param() getUsersParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ): string {
-    console.log('id:', id);
-    console.log('limit:', limit);
-    console.log('page', page);
-
+    console.log('getUsersParamDto:', getUsersParamDto);
     return 'Get Users Request';
   }
 
@@ -35,7 +34,8 @@ export class UsersController {
   }
 
   @Patch()
-  public patchUser(): string {
+  public patchUser(@Body() patchUserDto: PatchUserDto): string {
+    console.log('patchUserDto:', patchUserDto);
     return 'Patch User Request';
   }
 
