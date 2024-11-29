@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Put,
@@ -12,10 +14,15 @@ import {
 
 @Controller('users')
 export class UsersController {
-  @Get('/:id')
-  public getUsers(@Param() params: any, @Query() query: any): string {
-    console.log('params', params);
-    console.log('query', query);
+  @Get('/:id?')
+  public getUsers(
+    @Param('id', ParseIntPipe) id: number | undefined,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+  ): string {
+    console.log('id:', id);
+    console.log('limit:', limit);
+    console.log('page', page);
 
     return 'Get Users Request';
   }
