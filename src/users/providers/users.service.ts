@@ -16,8 +16,6 @@ export class UsersService {
   ) {
     const isAuthenticated = this.authService.isAuthenticated();
 
-    console.log('isAuthenticated', isAuthenticated);
-
     return [
       {
         firstName: 'John',
