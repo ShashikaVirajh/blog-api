@@ -11,6 +11,8 @@ import { User } from './users/user.entity';
 import { Post } from './posts/post.entity';
 import { TagsModule } from './tags/tags.module';
 import { Tag } from './tags/tag.entity';
+import { MetaOptionsModule } from './meta-options/meta-options.module';
+import { MetaOption } from './meta-options/meta-option.entity';
 
 @Module({
   imports: [
@@ -18,13 +20,14 @@ import { Tag } from './tags/tag.entity';
     PostsModule,
     AuthModule,
     TagsModule,
+    MetaOptionsModule,
 
     TypeOrmModule.forRootAsync({
       imports: [],
       inject: [],
       useFactory: () => ({
         type: 'postgres',
-        entities: [User, Post, Tag],
+        entities: [User, Post, Tag, MetaOption],
         synchronize: true,
         port: 5432,
         username: 'postgres',
