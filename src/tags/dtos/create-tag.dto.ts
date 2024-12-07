@@ -13,8 +13,8 @@ import {
 export class CreateTagDto {
   @ApiProperty()
   @IsString()
-  @MinLength(3)
   @IsNotEmpty()
+  @MinLength(3)
   @MaxLength(256)
   name: string;
 
@@ -25,7 +25,7 @@ export class CreateTagDto {
     message:
       'A slug should be all small letters and uses only "-" and without spaces. For example "my-url"',
   })
-  @MaxLength(512)
+  @MaxLength(256)
   slug: string;
 
   @ApiPropertyOptional()
