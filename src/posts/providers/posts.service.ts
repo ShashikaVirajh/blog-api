@@ -1,5 +1,4 @@
 import { Body, Injectable } from '@nestjs/common';
-import { UsersService } from '../../users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { Repository } from 'typeorm';
 import { Post } from '../post.entity';
@@ -9,8 +8,6 @@ import { MetaOption } from '../../meta-options/meta-option.entity';
 @Injectable()
 export class PostsService {
   constructor(
-    // Inject Users service
-    private readonly usersService: UsersService,
     // Inject Post repository
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>,
@@ -24,8 +21,7 @@ export class PostsService {
     return await this.postsRepository.save(newPost);
   }
 
-  public async findAll(userId: string) {
-    const user = this.usersService.findOneById(userId);
+  public async findAll() {
     return await this.postsRepository.find();
   }
 

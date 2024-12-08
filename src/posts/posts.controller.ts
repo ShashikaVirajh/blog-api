@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  Param,
   ParseIntPipe,
   Patch,
   Post,
@@ -19,9 +18,9 @@ import { PatchPostDto } from './dtos/patch-post.dto';
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
-  @Get('/:userId?')
-  public getPosts(@Param('userId') userId: string) {
-    return this.postsService.findAll(userId);
+  @Get()
+  public getPosts() {
+    return this.postsService.findAll();
   }
 
   @ApiOperation({
