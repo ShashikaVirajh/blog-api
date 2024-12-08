@@ -1,1 +1,1 @@
-GET http://localhost:3001/posts/12345
+GET http://localhost:3001/posts

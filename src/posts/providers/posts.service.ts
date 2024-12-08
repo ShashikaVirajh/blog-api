@@ -20,41 +20,25 @@ export class PostsService {
   ) {}
 
   public async create(@Body() createPostDto: CreatePostDto) {
-    // Create metaOptions if available in the request body
-    let metaOptions = createPostDto.metaOptions
-      ? this.metaOptionsRepository.create(createPostDto.metaOptions)
-      : null;
-
-    if (metaOptions) {
-      await this.metaOptionsRepository.save(metaOptions);
-    }
-
-    // Create post
     const newPost = this.postsRepository.create(createPostDto);
-
-    // Add metaOptions to the post
-    if (metaOptions) {
-      // Passing the entire metaOptions object. Not only the id.
-      newPost.metaOptions = metaOptions;
-    }
-
     return await this.postsRepository.save(newPost);
   }
 
-  public findAll(userId: string) {
+  public async findAll(userId: string) {
     const user = this.usersService.findOneById(userId);
+    return await this.postsRepository.find();
+  }
 
-    return [
-      {
-        user,
-        title: 'Post 1',
-        content: 'Post 1 content',
-      },
-      {
-        user,
-        title: 'Post 2',
-        content: 'Post 2 content',
-      },
-    ];
+  public async delete(id: number) {
+    const post = await this.postsRepository.findOneBy({ id });
+    const metaOptionId = post.metaOptions.id;
+
+    await this.postsRepository.delete(id);
+    await this.metaOptionsRepository.delete(metaOptionId);
+
+    return {
+      deleted: true,
+      id,
+    };
   }
 }
