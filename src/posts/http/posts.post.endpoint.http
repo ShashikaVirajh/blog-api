@@ -10,14 +10,7 @@ Content-Type: application/json
   "schema": "{\"name\":\"John Doe\",\"age\":30,\"isStudent\":false,\"courses\":[\"Mathematics\",\"Physics\",\"Computer Science\"],\"address\":{\"street\":\"123 Main St\",\"city\":\"Anytown\",\"postalCode\":\"12345\"}}",
   "featuredImageUrl": "https://en.wikipedia.org/wiki/Sherlock_Holmes",
   "publishOn": "2023-03-16T07:46:32+0000",
-  "tags": [
-    "nestjs",
-    "typescript"
-  ],
-  "metaOptions": [
-    {
-      "key": "testkey",
-      "value": 20
-    }
-  ]
+  "metaOptions": {
+    "metaValue": "{\"sidebarEnabled\": true, \"footerActive\": true}"
+  }
 }
