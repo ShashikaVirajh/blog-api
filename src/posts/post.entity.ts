@@ -1,7 +1,14 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { PostType } from './enums/post-type.enum';
 import { PostStatus } from './enums/post-status.enum';
 import { MetaOption } from '../meta-options/meta-option.entity';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Post {
@@ -72,4 +79,8 @@ export class Post {
     eager: true,
   })
   metaOptions?: MetaOption;
+
+  // FK should be in many-to-one side
+  @ManyToOne(() => User, (user) => user.posts)
+  author?: User;
 }
