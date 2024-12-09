@@ -21,20 +21,22 @@ export class PostsService {
   public async create(@Body() createPostDto: CreatePostDto) {
     const author = await this.userService.findOneById(createPostDto.authorId);
 
-    console.log('author', author);
-
     const newPost = this.postsRepository.create({
       ...createPostDto,
       author: author,
     });
 
-    console.log('newPost', newPost);
-
     return await this.postsRepository.save(newPost);
   }
 
   public async findAll() {
-    return await this.postsRepository.find();
+    return await this.postsRepository.find({
+      // Set 'eager:true' in the entity or specify related entities here
+      relations: {
+        metaOptions: true,
+        author: true,
+      },
+    });
   }
 
   public async delete(id: number) {
