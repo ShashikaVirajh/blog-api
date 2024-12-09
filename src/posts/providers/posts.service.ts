@@ -4,10 +4,12 @@ import { Repository } from 'typeorm';
 import { Post } from '../post.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MetaOption } from '../../meta-options/meta-option.entity';
+import { UsersService } from '../../users/providers/users.service';
 
 @Injectable()
 export class PostsService {
   constructor(
+    private readonly userService: UsersService,
     // Inject Post repository
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>,
@@ -17,7 +19,17 @@ export class PostsService {
   ) {}
 
   public async create(@Body() createPostDto: CreatePostDto) {
-    const newPost = this.postsRepository.create(createPostDto);
+    const author = await this.userService.findOneById(createPostDto.authorId);
+
+    console.log('author', author);
+
+    const newPost = this.postsRepository.create({
+      ...createPostDto,
+      author: author,
+    });
+
+    console.log('newPost', newPost);
+
     return await this.postsRepository.save(newPost);
   }
 

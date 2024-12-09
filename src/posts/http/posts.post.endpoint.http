@@ -2,7 +2,7 @@ POST http://localhost:3001/posts
 Content-Type: application/json
 
 {
-  "title": "What's new with NestJS",
+  "title": "What is NestJS?",
   "postType": "post",
   "slug": "new-with-nestjs-04",
   "status": "draft",
@@ -12,5 +12,6 @@ Content-Type: application/json
   "publishOn": "2023-03-16T07:46:32+0000",
   "metaOptions": {
     "metaValue": "{\"sidebarEnabled\": true, \"footerActive\": true, \"notifications\": false}"
-  }
+  },
+  "authorId": 9
 }
