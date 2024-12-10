@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Post } from '../posts/post.entity';
 
 @Entity()
 export class Tag {
@@ -47,10 +49,8 @@ export class Tag {
   })
   featuredImage: string;
 
-  // @ManyToMany(() => Post, (post) => post.tags, {
-  //   onDelete: 'CASCADE',
-  // })
-  // posts: Post[];
+  @ManyToMany(() => Post, (post) => post.tags)
+  posts: Post[];
 
   @CreateDateColumn()
   createDate: Date;
