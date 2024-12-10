@@ -2,9 +2,9 @@ POST http://localhost:3001/posts
 Content-Type: application/json
 
 {
-  "title": "What is NestJS?",
+  "title": "What is NextJS?",
   "postType": "post",
-  "slug": "new-with-nestjs-04",
+  "slug": "new-with-nestjs-05",
   "status": "draft",
   "content": "test content",
   "schema": "{\"name\":\"John Doe\",\"age\":30,\"isStudent\":false,\"courses\":[\"Mathematics\",\"Physics\",\"Computer Science\"],\"address\":{\"street\":\"123 Main St\",\"city\":\"Anytown\",\"postalCode\":\"12345\"}}",
@@ -13,5 +13,9 @@ Content-Type: application/json
   "metaOptions": {
     "metaValue": "{\"sidebarEnabled\": true, \"footerActive\": true, \"notifications\": false}"
   },
-  "authorId": 9
+  "authorId": 9,
+  "tags": [
+    1,
+    2
+  ]
 }
