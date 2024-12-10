@@ -2,7 +2,7 @@ POST http://localhost:3001/tags
 Content-Type: application/json
 
 {
-  "name": "NextJS",
-  "slug": "nextjs",
-  "description": "All posts NextJS"
+  "name": "ruby",
+  "slug": "ruby",
+  "description": "All posts ruby"
 }

@@ -4,7 +4,7 @@ Content-Type: application/json
 {
   "title": "What is Vue?",
   "postType": "post",
-  "slug": "new-with-nestjs-07",
+  "slug": "new-with-nestjs-09",
   "status": "draft",
   "content": "test content",
   "schema": "{\"name\":\"John Doe\",\"age\":30,\"isStudent\":false,\"courses\":[\"Mathematics\",\"Physics\",\"Computer Science\"],\"address\":{\"street\":\"123 Main St\",\"city\":\"Anytown\",\"postalCode\":\"12345\"}}",
@@ -15,6 +15,7 @@ Content-Type: application/json
   },
   "authorId": 9,
   "tags": [
-    1
+    10,
+    11
   ]
 }
