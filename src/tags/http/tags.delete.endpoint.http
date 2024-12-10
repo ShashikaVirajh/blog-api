@@ -1,5 +1,7 @@
 DELETE http://localhost:3001/tags
-    ?id=6
+    ?id=2
+
+###
 
 DELETE http://localhost:3000/tags/soft-delete
-  ?id=7
+    ?id=7
