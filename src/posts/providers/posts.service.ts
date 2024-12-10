@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MetaOption } from '../../meta-options/meta-option.entity';
 import { UsersService } from '../../users/providers/users.service';
 import { TagsService } from '../../tags/providers/tags.service';
+import { PatchPostDto } from '../dtos/patch-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -33,15 +34,21 @@ export class PostsService {
     return await this.postsRepository.save(newPost);
   }
 
-  public async findAll() {
-    return await this.postsRepository.find({
-      // Set 'eager:true' in the entity or specify related entities here
-      relations: {
-        metaOptions: true,
-        author: true,
-        tags: true,
-      },
-    });
+  public async update(patchPostDto: PatchPostDto) {
+    const post = await this.postsRepository.findOneBy({ id: patchPostDto.id });
+
+    post.title = patchPostDto.title ?? post.title;
+    post.content = patchPostDto.content ?? post.content;
+    post.status = patchPostDto.status ?? post.status;
+    post.postType = patchPostDto.postType ?? post.postType;
+    post.slug = patchPostDto.slug ?? post.slug;
+    post.featuredImageUrl =
+      patchPostDto.featuredImageUrl ?? post.featuredImageUrl;
+    post.publishOn = patchPostDto.publishOn ?? post.publishOn;
+
+    post.tags = await this.tagsService.findMultiple(patchPostDto.tags);
+
+    return await this.postsRepository.save(post);
   }
 
   public async delete(id: number) {
@@ -51,5 +58,16 @@ export class PostsService {
       deleted: true,
       id,
     };
+  }
+
+  public async findAll() {
+    return await this.postsRepository.find({
+      // Set 'eager:true' in the entity or specify related entities here
+      relations: {
+        metaOptions: true,
+        author: true,
+        tags: true,
+      },
+    });
   }
 }
