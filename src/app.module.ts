@@ -36,7 +36,6 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        // entities: [],
 
         // Automatically syncs the database schema with entity definitions.
         synchronize: configService.get('database.synchronize'),
