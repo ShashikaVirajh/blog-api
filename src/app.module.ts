@@ -12,6 +12,7 @@ import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { appConfig } from './config/app.config';
 import { databaseConfig } from './config/database.config';
+import { envSchema } from './config/env.schema';
 
 // Get the current NODE_ENV
 const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
@@ -24,8 +25,9 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
     TagsModule,
     MetaOptionsModule,
     ConfigModule.forRoot({
-      isGlobal: true,
       load: [appConfig, databaseConfig],
+      isGlobal: true,
+      validate: envSchema.parse,
       envFilePath: !CURRENT_ENVIRONMENT
         ? '.env'
         : `.env.${CURRENT_ENVIRONMENT}`,
@@ -45,8 +47,8 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
         port: configService.get('database.port'),
         username: configService.get('database.user'),
         password: configService.get('database.password'),
-        host: configService.get('DATABASEdatabase_HOST'),
-        database: configService.get('DATABASE_NAME'),
+        host: configService.get('database.host'),
+        database: configService.get('database.name'),
       }),
     }),
   ],
