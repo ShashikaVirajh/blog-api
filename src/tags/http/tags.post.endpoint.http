@@ -2,7 +2,7 @@ POST http://localhost:3001/tags
 Content-Type: application/json
 
 {
-  "name": "ruby",
-  "slug": "ruby",
-  "description": "All posts ruby"
+  "name": "vue",
+  "slug": "vue",
+  "description": "All posts vue"
 }

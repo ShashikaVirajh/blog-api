@@ -12,5 +12,9 @@ export const envSchema = z.object({
   DATABASE_HOST: z.string().nonempty('DATABASE_HOST is required'),
   DATABASE_NAME: z.string().nonempty('DATABASE_NAME is required'),
   DATABASE_USER: z.string().nonempty('DATABASE_USER is required'),
+
+  DATABASE_SYNC: z.string().nonempty('DATABASE_SYNC is required'),
+  DATABASE_AUTOLOAD: z.string().nonempty('DATABASE_AUTOLOAD is required'),
+
   PROFILE_API_KEY: z.string().nonempty('PROFILE_API_KEY is required'),
 });

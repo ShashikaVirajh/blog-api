@@ -36,20 +36,24 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
+      useFactory: (configService: ConfigService) => {
+        console.log(configService.get('database.synchronize'));
+        console.log(configService.get('database.autoLoadEntities'));
+        return {
+          type: 'postgres',
 
-        // Automatically syncs the database schema with entity definitions.
-        synchronize: configService.get('database.synchronize'),
-        // Automatically loads all registered entities across modules.
-        autoLoadEntities: configService.get('database.'),
+          // Automatically syncs the database schema with entity definitions.
+          synchronize: configService.get('database.synchronize'),
+          // Automatically loads all registered entities across modules.
+          autoLoadEntities: configService.get('database.autoLoadEntities'),
 
-        port: configService.get('database.port'),
-        username: configService.get('database.user'),
-        password: configService.get('database.password'),
-        host: configService.get('database.host'),
-        database: configService.get('database.name'),
-      }),
+          port: configService.get('database.port'),
+          username: configService.get('database.user'),
+          password: configService.get('database.password'),
+          host: configService.get('database.host'),
+          database: configService.get('database.name'),
+        };
+      },
     }),
   ],
   controllers: [AppController],
