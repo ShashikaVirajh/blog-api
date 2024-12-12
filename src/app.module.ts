@@ -10,6 +10,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TagsModule } from './tags/tags.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { appConfig } from './config/app.config';
+import { databaseConfig } from './config/database.config';
 
 // Get the current NODE_ENV
 const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
@@ -23,6 +25,7 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
     MetaOptionsModule,
     ConfigModule.forRoot({
       isGlobal: true,
+      load: [appConfig, databaseConfig],
       envFilePath: !CURRENT_ENVIRONMENT
         ? '.env'
         : `.env.${CURRENT_ENVIRONMENT}`,
@@ -35,14 +38,15 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
         type: 'postgres',
         // entities: [],
 
-        synchronize: configService.get('DATABASE_SYNCHRONIZE'),
-        // Automatically load entities defined in feature modules and synchronize the database schema.
-        autoLoadEntities: configService.get('DATABASE_AUTOLOAD_ENTITIES'),
+        // Automatically syncs the database schema with entity definitions.
+        synchronize: configService.get('database.synchronize'),
+        // Automatically loads all registered entities across modules.
+        autoLoadEntities: configService.get('database.'),
 
-        port: configService.get('DATABASE_PORT'),
-        username: configService.get('DATABASE_USER'),
-        password: configService.get('DATABASE_PASSWORD'),
-        host: configService.get('DATABASE_HOST'),
+        port: configService.get('database.port'),
+        username: configService.get('database.user'),
+        password: configService.get('database.password'),
+        host: configService.get('DATABASEdatabase_HOST'),
         database: configService.get('DATABASE_NAME'),
       }),
     }),
