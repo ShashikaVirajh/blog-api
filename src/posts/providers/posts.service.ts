@@ -1,3 +1,4 @@
+import { InjectRepository } from '@nestjs/typeorm';
 import {
   BadRequestException,
   Body,
@@ -7,7 +8,6 @@ import {
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { Repository } from 'typeorm';
 import { Post } from '../post.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { MetaOption } from '../../meta-options/meta-option.entity';
 import { UsersService } from '../../users/providers/users.service';
 import { TagsService } from '../../tags/providers/tags.service';
