@@ -37,8 +37,6 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        console.log(configService.get('database.synchronize'));
-        console.log(configService.get('database.autoLoadEntities'));
         return {
           type: 'postgres',
 

@@ -1,8 +1,6 @@
 import { registerAs } from '@nestjs/config';
 
 export const databaseConfig = registerAs('database', () => {
-  console.log(process.env);
-
   return {
     host: process.env.DATABASE_HOST || 'localhost',
     port: parseInt(process.env.DATABASE_PORT) || 5432,

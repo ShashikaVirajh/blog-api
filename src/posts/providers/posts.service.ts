@@ -1,4 +1,9 @@
-import { Body, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Injectable,
+  RequestTimeoutException,
+} from '@nestjs/common';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { Repository } from 'typeorm';
 import { Post } from '../post.entity';
@@ -35,7 +40,47 @@ export class PostsService {
   }
 
   public async update(patchPostDto: PatchPostDto) {
-    const post = await this.postsRepository.findOneBy({ id: patchPostDto.id });
+    let post = null;
+    let tags = null;
+
+    post = await this.postsRepository.findOneBy({ id: patchPostDto.id });
+
+    try {
+      tags = await this.tagsService.findMultiple(patchPostDto.tags);
+    } catch (error) {
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment',
+        {
+          description: 'Error connecting to the database',
+        },
+      );
+    }
+
+    console.log('patchPostDto.tags.length', patchPostDto.tags.length);
+    console.log('tags', tags);
+
+    if (!tags || tags.length !== patchPostDto.tags.length) {
+      throw new BadRequestException(
+        'Please check your tag Ids and ensure they are correct',
+      );
+    }
+
+    try {
+      post = await this.postsRepository.findOneBy({
+        id: patchPostDto.id,
+      });
+    } catch (error) {
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment please try later',
+        {
+          description: 'Error connecting to the database',
+        },
+      );
+    }
+
+    if (!post) {
+      throw new BadRequestException('The post Id does not exist');
+    }
 
     post.title = patchPostDto.title ?? post.title;
     post.content = patchPostDto.content ?? post.content;

@@ -60,7 +60,6 @@ export class UsersController {
 
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto): string {
-    console.log('patchUserDto:', patchUserDto);
     return 'Patch User Request';
   }
 
