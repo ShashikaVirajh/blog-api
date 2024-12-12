@@ -51,7 +51,7 @@ export class UsersService {
       throw new RequestTimeoutException(
         'Unable to process your request at the moment please try later',
         {
-          description: 'Error connecting to the the datbase',
+          description: 'Error connecting to the the database',
         },
       );
     }
@@ -77,6 +77,25 @@ export class UsersService {
   }
 
   public async findOneById(id: number) {
-    return await this.usersRepository.findOneBy({ id });
+    let user = null;
+
+    try {
+      user = await this.usersRepository.findOneBy({
+        id,
+      });
+    } catch (error) {
+      throw new RequestTimeoutException(
+        'Unable to process your request at the moment please try later',
+        {
+          description: 'Error connecting to the the database',
+        },
+      );
+    }
+
+    if (!user) {
+      throw new BadRequestException('The user id does not exist');
+    }
+
+    return user;
   }
 }
