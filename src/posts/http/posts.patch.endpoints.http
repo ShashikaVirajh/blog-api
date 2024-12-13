@@ -2,13 +2,10 @@ PATCH http://localhost:3001/posts
 Content-Type: application/json
 
 {
-  "id": 6,
-  "title": "How NextJS differs from React?",
-  "content": "Main differences of NextJS from React are ...",
+  "id": 9,
+  "content": "A ship with a submarine for discoveries.",
   "postType": "post",
   "tags": [
-    2,
-    5,
     6,
     7
   ]

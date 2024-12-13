@@ -3,6 +3,7 @@ import { In, Repository } from 'typeorm';
 import { Tag } from '../tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTagDto } from '../dtos/create-tag.dto';
+import { DatabaseTimeoutException } from '../../helpers/exceptions';
 
 @Injectable()
 export class TagsService {
@@ -11,30 +12,50 @@ export class TagsService {
     private readonly tagsRepository: Repository<Tag>,
   ) {}
 
+  // Create tag
   public async create(createTagDto: CreateTagDto) {
-    const newTag = this.tagsRepository.create(createTagDto);
-    return await this.tagsRepository.save(newTag);
+    try {
+      const newTag = this.tagsRepository.create(createTagDto);
+      return await this.tagsRepository.save(newTag);
+    } catch (error) {
+      DatabaseTimeoutException();
+    }
   }
 
+  // Find multiple tags by ids
   public async findMultiple(ids: number[]) {
-    return await this.tagsRepository.find({ where: { id: In(ids) } });
+    try {
+      return await this.tagsRepository.find({ where: { id: In(ids) } });
+    } catch (error) {
+      DatabaseTimeoutException();
+    }
   }
 
+  // Delete a tag
   public async delete(id: number) {
-    await this.tagsRepository.delete(id);
+    try {
+      await this.tagsRepository.delete(id);
 
-    return {
-      deleted: true,
-      id,
-    };
+      return {
+        deleted: true,
+        id,
+      };
+    } catch (error) {
+      DatabaseTimeoutException();
+    }
   }
 
+  // Soft-Delete a tag
   public async softDelete(id: number) {
-    await this.tagsRepository.softDelete(id);
+    try {
+      await this.tagsRepository.softDelete(id);
 
-    return {
-      softDeleted: true,
-      id,
-    };
+      return {
+        softDeleted: true,
+        id,
+      };
+    } catch (error) {
+      DatabaseTimeoutException();
+    }
   }
 }

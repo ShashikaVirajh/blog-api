@@ -2,9 +2,9 @@ POST http://localhost:3001/posts
 Content-Type: application/json
 
 {
-  "title": "What is ruby?",
+  "title": "What is deep Fathom?",
   "postType": "post",
-  "slug": "post-05",
+  "slug": "post-10",
   "status": "draft",
   "content": "test content",
   "schema": "{\"name\":\"John Doe\",\"age\":30,\"isStudent\":false,\"courses\":[\"Mathematics\",\"Physics\",\"Computer Science\"],\"address\":{\"street\":\"123 Main St\",\"city\":\"Anytown\",\"postalCode\":\"12345\"}}",
@@ -15,10 +15,8 @@ Content-Type: application/json
   },
   "authorId": 1,
   "tags": [
-    1,
-    2,
-    3,
     6,
-    10
+    10,
+    15
   ]
 }
