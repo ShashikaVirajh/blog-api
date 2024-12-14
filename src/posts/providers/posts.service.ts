@@ -7,7 +7,7 @@ import { MetaOption } from '../../meta-options/meta-option.entity';
 import { UsersService } from '../../users/providers/users.service';
 import { TagsService } from '../../tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
-import { DatabaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions';
 
 @Injectable()
 export class PostsService {
@@ -36,7 +36,7 @@ export class PostsService {
 
       return await this.postsRepository.save(newPost);
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 
@@ -71,7 +71,7 @@ export class PostsService {
 
       return await this.postsRepository.save(post);
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 
@@ -85,7 +85,7 @@ export class PostsService {
         id,
       };
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 
@@ -101,7 +101,7 @@ export class PostsService {
         },
       });
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 }

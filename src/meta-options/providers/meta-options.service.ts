@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MetaOption } from '../meta-option.entity';
 import { CreatePostMetaOptionsDto } from '../dtos/create-post-meta-options.dto';
-import { DatabaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions';
 
 @Injectable()
 export class MetaOptionsService {
@@ -22,7 +22,7 @@ export class MetaOptionsService {
       await this.metaOptionsRepository.save(newMetaOption);
       return newMetaOption;
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 }

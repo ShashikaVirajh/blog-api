@@ -6,20 +6,24 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { ConfigType } from '@nestjs/config';
 import { profileConfig } from '../config/profile.config';
-import { DatabaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions';
+import { CreateManyUsersService } from './create-many-users.service';
+import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 
 @Injectable()
 export class UsersService {
   constructor(
-    // Injecting profile config
+    /** Injecting profile config */
     @Inject(profileConfig.KEY)
     private readonly profileConfiguration: ConfigType<typeof profileConfig>,
-    // Injecting user repository
+    /** Injecting user repository */
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    /** Inject many users service */
+    private readonly createManyUsersService: CreateManyUsersService,
   ) {}
 
-  // Create user
+  /** Create user */
   public async createUser(createUserDto: CreateUserDto) {
     try {
       const existingUser = await this.usersRepository.findOne({
@@ -37,11 +41,11 @@ export class UsersService {
         throw error;
       }
 
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 
-  // Find all users
+  /** Find all user */
   public findAll(
     getUsersParamDto: GetUsersParamDto,
     limit: number,
@@ -59,7 +63,7 @@ export class UsersService {
     ];
   }
 
-  // Find a user by id
+  /** Find a user by id */
   public async findOneById(id: number) {
     try {
       const user = await this.usersRepository.findOneBy({
@@ -72,7 +76,12 @@ export class UsersService {
 
       return user;
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
+  }
+
+  /** Create many users */
+  public async createMany(createManyUsersDto: CreateManyUsersDto) {
+    return await this.createManyUsersService.createMany(createManyUsersDto);
   }
 }

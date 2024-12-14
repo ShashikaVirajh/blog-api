@@ -4,6 +4,35 @@ Content-Type: application/json
 {
   "firstName": "Sherlock",
   "lastName": "Holmes",
-  "email": "woofy@gmail.com",
+  "email": "sherlock2@gmail.com",
   "password": "Pa$$word1"
 }
+
+###
+
+POST http://localhost:3001/users/create-many
+Content-Type: application/json
+
+{
+  "users": [
+    {
+      "firstName": "Sherlock",
+      "lastName": "Holmes",
+      "email": "sherlock@gmail.com",
+      "password": "Password123#"
+    },
+    {
+      "firstName": "Hercule",
+      "lastName": "Poirot",
+      "email": "hercule@gmail.com",
+      "password": "Pa$$word1"
+    },
+    {
+      "firstName": "John",
+      "lastName": "Watson",
+      "email": "john@gmail.com",
+      "password": "Pa$$word1"
+    }
+  ]
+}
+

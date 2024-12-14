@@ -3,7 +3,7 @@ import { In, Repository } from 'typeorm';
 import { Tag } from '../tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTagDto } from '../dtos/create-tag.dto';
-import { DatabaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions';
 
 @Injectable()
 export class TagsService {
@@ -18,7 +18,7 @@ export class TagsService {
       const newTag = this.tagsRepository.create(createTagDto);
       return await this.tagsRepository.save(newTag);
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 
@@ -27,7 +27,7 @@ export class TagsService {
     try {
       return await this.tagsRepository.find({ where: { id: In(ids) } });
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 
@@ -41,7 +41,7 @@ export class TagsService {
         id,
       };
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 
@@ -55,7 +55,7 @@ export class TagsService {
         id,
       };
     } catch (error) {
-      DatabaseTimeoutException();
+      databaseTimeoutException();
     }
   }
 }
