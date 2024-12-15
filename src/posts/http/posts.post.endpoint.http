@@ -2,14 +2,14 @@ POST http://localhost:3001/posts
 Content-Type: application/json
 
 {
-  "title": "What is deep Fathom?",
+  "title": "What is Disparaue2?",
   "postType": "post",
-  "slug": "post-10",
+  "slug": "post-201",
   "status": "draft",
   "content": "test content",
   "schema": "{\"name\":\"John Doe\",\"age\":30,\"isStudent\":false,\"courses\":[\"Mathematics\",\"Physics\",\"Computer Science\"],\"address\":{\"street\":\"123 Main St\",\"city\":\"Anytown\",\"postalCode\":\"12345\"}}",
   "featuredImageUrl": "https://en.wikipedia.org/wiki/Sherlock_Holmes",
-  "publishOn": "2023-03-16T07:46:32+0000",
+  "publishOn": "2024-03-16T07:46:32+0000",
   "metaOptions": {
     "metaValue": "{\"sidebarEnabled\": true, \"footerActive\": true, \"notifications\": false}"
   },

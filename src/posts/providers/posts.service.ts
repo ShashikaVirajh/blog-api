@@ -8,6 +8,7 @@ import { UsersService } from '../../users/providers/users.service';
 import { TagsService } from '../../tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
 import { databaseTimeoutException } from '../../helpers/exceptions';
+import { GetPostsDto } from '../dtos/get-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -90,7 +91,7 @@ export class PostsService {
   }
 
   // Find all posts
-  public async findAll() {
+  public async findAll(postQuery: GetPostsDto) {
     try {
       return await this.postsRepository.find({
         // Set 'eager:true' in the entity or specify related entities here
@@ -99,6 +100,8 @@ export class PostsService {
           author: true,
           tags: true,
         },
+        skip: (postQuery.page - 1) * postQuery.limit,
+        take: postQuery.limit,
       });
     } catch (error) {
       databaseTimeoutException();
