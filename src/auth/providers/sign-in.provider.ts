@@ -35,22 +35,24 @@ export class SignInProvider {
         throw new UnauthorizedException('Passwords do not match');
       }
 
-      const accessToken = await this.jwtService.signAsync(
-        {
-          sub: user.id,
-          email: user.email,
-        },
-        {
-          audience: this.jwtConfiguration.audience,
-          issuer: this.jwtConfiguration.issuer,
-          secret: this.jwtConfiguration.secret,
-          expiresIn: this.jwtConfiguration.accessTokenTtl,
-        },
-      );
+      // const accessToken = await this.jwtService.signAsync(
+      //   {
+      //     sub: user.id,
+      //     email: user.email,
+      //   },
+      //   {
+      //     audience: this.jwtConfiguration.audience,
+      //     issuer: this.jwtConfiguration.issuer,
+      //     secret: this.jwtConfiguration.secret,
+      //     expiresIn: this.jwtConfiguration.accessTokenTtl,
+      //   },
+      // );
 
-      return {
-        accessToken,
-      };
+      return true;
+
+      // return {
+      //   accessToken,
+      // };
     } catch (error) {
       databaseTimeoutException(error);
     }
