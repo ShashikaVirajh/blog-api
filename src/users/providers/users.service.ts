@@ -9,6 +9,7 @@ import { profileConfig } from '../config/profile.config';
 import { databaseTimeoutException } from '../../helpers/exceptions';
 import { CreateManyUsersService } from './create-many-users.service';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
+import { CreateUserService } from './create-user.service';
 
 @Injectable()
 export class UsersService {
@@ -19,30 +20,15 @@ export class UsersService {
     /** Injecting user repository */
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    /** Inject user service */
+    private readonly createUserService: CreateUserService,
     /** Inject many users service */
     private readonly createManyUsersService: CreateManyUsersService,
   ) {}
 
   /** Create user */
   public async createUser(createUserDto: CreateUserDto) {
-    try {
-      const existingUser = await this.usersRepository.findOne({
-        where: { email: createUserDto.email },
-      });
-
-      if (existingUser) {
-        throw new BadRequestException('The email already exists.');
-      }
-
-      const newUser = this.usersRepository.create(createUserDto);
-      return await this.usersRepository.save(newUser);
-    } catch (error) {
-      if (error instanceof BadRequestException) {
-        throw error;
-      }
-
-      databaseTimeoutException();
-    }
+    return await this.createUserService.createUser(createUserDto);
   }
 
   /** Find all user */

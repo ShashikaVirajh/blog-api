@@ -2,9 +2,9 @@ POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-  "firstName": "Sherlock",
-  "lastName": "Holmes",
-  "email": "sherlock2@gmail.com",
+  "firstName": "Deep",
+  "lastName": "Fathom",
+  "email": "deepfathom@gmail.com",
   "password": "Pa$$word1"
 }
 
@@ -18,7 +18,7 @@ Content-Type: application/json
     {
       "firstName": "Sherlock",
       "lastName": "Holmes",
-      "email": "sherlock@gmail.com",
+      "email": "sherlockholmes@gmail.com",
       "password": "Password123#"
     },
     {
