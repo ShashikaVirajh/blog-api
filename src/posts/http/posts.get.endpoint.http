@@ -1,5 +1,5 @@
 GET http://localhost:3001/posts/
     ?startDate=2024-01-10
     &endDate=2025-01-10
-    &limit=2
+    &limit=4
     &page=2

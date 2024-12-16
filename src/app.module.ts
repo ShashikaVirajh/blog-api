@@ -13,6 +13,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { appConfig } from './config/app.config';
 import { databaseConfig } from './config/database.config';
 import { envSchema } from './config/env.schema';
+import { PaginationModule } from './common/pagination/pagination.module';
 
 // Get the current NODE_ENV
 const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
@@ -24,6 +25,7 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
     AuthModule,
     TagsModule,
     MetaOptionsModule,
+    PaginationModule,
     ConfigModule.forRoot({
       load: [appConfig, databaseConfig],
       isGlobal: true,

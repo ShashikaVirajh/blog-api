@@ -9,12 +9,18 @@ import { TagsService } from '../../tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
 import { databaseTimeoutException } from '../../helpers/exceptions';
 import { GetPostsDto } from '../dtos/get-post.dto';
+import { PaginationService } from '../../common/pagination/providers/pagination.service';
+import { PaginatedResponse } from '../../common/pagination/interfaces/paginated-response.interface';
 
 @Injectable()
 export class PostsService {
   constructor(
+    // Inject Tag service
     private readonly tagsService: TagsService,
+    // Inject User service
     private readonly userService: UsersService,
+    // Inject Pagination service
+    private readonly paginationService: PaginationService,
     // Inject Post repository
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>,
@@ -91,18 +97,19 @@ export class PostsService {
   }
 
   // Find all posts
-  public async findAll(postQuery: GetPostsDto) {
+  public async findAll(
+    postQuery: GetPostsDto,
+  ): Promise<PaginatedResponse<Post>> {
     try {
-      return await this.postsRepository.find({
-        // Set 'eager:true' in the entity or specify related entities here
-        relations: {
-          metaOptions: true,
-          author: true,
-          tags: true,
+      const posts = await this.paginationService.paginateQuery(
+        {
+          limit: postQuery.limit,
+          page: postQuery.page,
         },
-        skip: (postQuery.page - 1) * postQuery.limit,
-        take: postQuery.limit,
-      });
+        this.postsRepository,
+      );
+
+      return posts;
     } catch (error) {
       databaseTimeoutException();
     }
