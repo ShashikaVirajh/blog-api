@@ -10,6 +10,7 @@ import { databaseTimeoutException } from '../../helpers/exceptions';
 import { CreateManyUsersService } from './create-many-users.service';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 import { CreateUserService } from './create-user.service';
+import { FindUserByEmailService } from './find-user-by-email.service';
 
 @Injectable()
 export class UsersService {
@@ -24,6 +25,8 @@ export class UsersService {
     private readonly createUserService: CreateUserService,
     /** Inject many users service */
     private readonly createManyUsersService: CreateManyUsersService,
+    /** Inject find user by email service */
+    private readonly findUserByEmailService: FindUserByEmailService,
   ) {}
 
   /** Create user */
@@ -69,5 +72,10 @@ export class UsersService {
   /** Create many users */
   public async createMany(createManyUsersDto: CreateManyUsersDto) {
     return await this.createManyUsersService.createMany(createManyUsersDto);
+  }
+
+  /** Finds one user by email */
+  public async findOneByEmail(email: string) {
+    return await this.findUserByEmailService.findOneByEmail(email);
   }
 }

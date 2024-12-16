@@ -8,6 +8,7 @@ import { UsersController } from './users.controller';
 import { CreateManyUsersService } from './providers/create-many-users.service';
 import { CreateUserService } from './providers/create-user.service';
 import { AuthModule } from '../auth/auth.module';
+import { FindUserByEmailService } from './providers/find-user-by-email.service';
 
 @Module({
   controllers: [UsersController],
@@ -16,7 +17,12 @@ import { AuthModule } from '../auth/auth.module';
     ConfigModule.forFeature(profileConfig),
     forwardRef(() => AuthModule),
   ],
-  providers: [UsersService, CreateManyUsersService, CreateUserService],
+  providers: [
+    UsersService,
+    CreateManyUsersService,
+    CreateUserService,
+    FindUserByEmailService,
+  ],
   exports: [UsersService],
 })
 export class UsersModule {}
