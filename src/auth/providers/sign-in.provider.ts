@@ -8,6 +8,9 @@ import { UsersService } from '../../users/providers/users.service';
 import { HashingService } from './hashing.service';
 import { SignInDto } from '../dtos/sign-in.dto';
 import { databaseTimeoutException } from '../../helpers/exceptions';
+import { JwtService } from '@nestjs/jwt';
+import { jwtConfig } from '../config/jwt.config';
+import { ConfigType } from '@nestjs/config';
 
 @Injectable()
 export class SignInProvider {
@@ -16,12 +19,13 @@ export class SignInProvider {
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
     // Inject the hashingProvider
-    private readonly hashingProvider: HashingService, //  private readonly jwtService: JwtService,
-    // Inject jwtService
-  ) // Inject jwtConfiguration
-  // @Inject(jwtConfig.KEY)
-  // private readonly jwtConfiguration: ConfigType<typeof jwtConfig>,
-  {}
+    private readonly hashingProvider: HashingService,
+    // Inject jwt service
+    private readonly jwtService: JwtService,
+    // Inject jwt configuration
+    @Inject(jwtConfig.KEY)
+    private readonly jwtConfiguration: ConfigType<typeof jwtConfig>,
+  ) {}
 
   public async signIn(signInDto: SignInDto) {
     try {
@@ -35,24 +39,22 @@ export class SignInProvider {
         throw new UnauthorizedException('Passwords do not match');
       }
 
-      // const accessToken = await this.jwtService.signAsync(
-      //   {
-      //     sub: user.id,
-      //     email: user.email,
-      //   },
-      //   {
-      //     audience: this.jwtConfiguration.audience,
-      //     issuer: this.jwtConfiguration.issuer,
-      //     secret: this.jwtConfiguration.secret,
-      //     expiresIn: this.jwtConfiguration.accessTokenTtl,
-      //   },
-      // );
+      const accessToken = await this.jwtService.signAsync(
+        {
+          sub: user.id,
+          email: user.email,
+        },
+        {
+          audience: this.jwtConfiguration.audience,
+          issuer: this.jwtConfiguration.issuer,
+          secret: this.jwtConfiguration.secret,
+          expiresIn: this.jwtConfiguration.accessTokenTtl,
+        },
+      );
 
-      return true;
-
-      // return {
-      //   accessToken,
-      // };
+      return {
+        accessToken,
+      };
     } catch (error) {
       databaseTimeoutException(error);
     }
