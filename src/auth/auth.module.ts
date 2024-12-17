@@ -5,8 +5,8 @@ import { UsersModule } from '../users/users.module';
 import { HashingProvider } from './providers/hashing.provider';
 import { BcryptProvider } from './providers/bcrypt.provider';
 import { SignInProvider } from './providers/sign-in.provider';
-import { ConfigModule } from '@nestjs/config';
 import { jwtConfig } from './config/jwt.config';
+import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
@@ -14,7 +14,6 @@ import { JwtModule } from '@nestjs/jwt';
 
   providers: [
     AuthService,
-    // When having both abstract and implementation classes, do it as follows
     {
       provide: HashingProvider,
       useClass: BcryptProvider,

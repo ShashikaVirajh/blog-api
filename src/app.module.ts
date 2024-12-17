@@ -14,11 +14,23 @@ import { appConfig } from './config/app.config';
 import { databaseConfig } from './config/database.config';
 import { envSchema } from './config/env.schema';
 import { PaginationModule } from './common/pagination/pagination.module';
+import { jwtConfig } from './auth/config/jwt.config';
+import { JwtModule } from '@nestjs/jwt';
+import { AccessTokenGuard } from './auth/guards/access-token.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 // Get the current NODE_ENV
 const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
 
 @Module({
+  controllers: [AppController],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+  ],
   imports: [
     UsersModule,
     PostsModule,
@@ -55,8 +67,8 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
         };
       },
     }),
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

@@ -2,10 +2,10 @@ import { z } from 'zod';
 import { Environment } from './environment.enum';
 
 export const envSchema = z.object({
-  // SYSTEM
+  /** SYSTEM */
   NODE_ENV: z.nativeEnum(Environment).default(Environment.DEVELOPMENT),
 
-  // DATABASE
+  /** DATABASE */
   DATABASE_PORT: z.preprocess(
     (port) => (typeof port === 'string' ? Number(port) : port),
     z.number().int().min(1).max(65535).default(5432),
@@ -17,7 +17,7 @@ export const envSchema = z.object({
   DATABASE_SYNC: z.string().nonempty('DATABASE_SYNC is required'),
   DATABASE_AUTOLOAD: z.string().nonempty('DATABASE_AUTOLOAD is required'),
 
-  // JWT
+  /** JWT */
   JWT_SECRET: z.string().nonempty('JWT_SECRET is required'),
   JWT_TOKEN_AUDIENCE: z.string().nonempty('JWT_TOKEN_AUDIENCE is required'),
   JWT_TOKEN_ISSUER: z.string().nonempty('JWT_TOKEN_ISSUER is required'),
@@ -28,7 +28,7 @@ export const envSchema = z.object({
       .default(3600),
   ),
 
-  // PROFILE
+  /** PROFILE */
   PROFILE_API_KEY: z.string().nonempty('PROFILE_API_KEY is required'),
 });
 
