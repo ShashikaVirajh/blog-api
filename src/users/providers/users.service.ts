@@ -6,11 +6,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { ConfigType } from '@nestjs/config';
 import { profileConfig } from '../config/profile.config';
-import { databaseTimeoutException } from '../../helpers/exceptions';
-import { CreateManyUsersService } from './create-many-users.service';
+import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
+import { CreateManyUsersProvider } from './create-many-users.provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
-import { CreateUserService } from './create-user.service';
-import { FindUserByEmailService } from './find-user-by-email.service';
+import { CreateUserProvider } from './create-user.provider';
+import { FindUserByEmailProvider } from './find-user-by-email.provider';
 
 @Injectable()
 export class UsersService {
@@ -22,11 +22,11 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     /** Inject user service */
-    private readonly createUserService: CreateUserService,
+    private readonly createUserService: CreateUserProvider,
     /** Inject many users service */
-    private readonly createManyUsersService: CreateManyUsersService,
+    private readonly createManyUsersService: CreateManyUsersProvider,
     /** Inject find user by email service */
-    private readonly findUserByEmailService: FindUserByEmailService,
+    private readonly findUserByEmailService: FindUserByEmailProvider,
   ) {}
 
   /** Create user */

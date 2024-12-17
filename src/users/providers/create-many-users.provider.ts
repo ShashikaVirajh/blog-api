@@ -4,11 +4,11 @@ import { User } from '../user.entity';
 import {
   databaseTimeoutException,
   failedTransactionException,
-} from '../../helpers/exceptions';
+} from '../../helpers/exceptions.helpers';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 
 @Injectable()
-export class CreateManyUsersService {
+export class CreateManyUsersProvider {
   constructor(private readonly dataSource: DataSource) {}
 
   /** Create many users */

@@ -3,7 +3,7 @@ import { In, Repository } from 'typeorm';
 import { Tag } from '../tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTagDto } from '../dtos/create-tag.dto';
-import { databaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
 
 @Injectable()
 export class TagsService {

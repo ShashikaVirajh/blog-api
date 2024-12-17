@@ -5,21 +5,21 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { databaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
 import { Repository } from 'typeorm';
 import { User } from '../user.entity';
-import { HashingService } from '../../auth/providers/hashing.service';
+import { HashingProvider } from '../../auth/providers/hashing.provider';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class CreateUserService {
+export class CreateUserProvider {
   constructor(
     // Inject user repository
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
     // Inject hashing service
-    @Inject(forwardRef(() => HashingService))
-    private readonly hashingService: HashingService,
+    @Inject(forwardRef(() => HashingProvider))
+    private readonly hashingService: HashingProvider,
   ) {}
 
   public async createUser(createUserDto: CreateUserDto) {

@@ -5,9 +5,9 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from '../../users/providers/users.service';
-import { HashingService } from './hashing.service';
+import { HashingProvider } from './hashing.provider';
 import { SignInDto } from '../dtos/sign-in.dto';
-import { databaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConfig } from '../config/jwt.config';
 import { ConfigType } from '@nestjs/config';
@@ -19,7 +19,7 @@ export class SignInProvider {
     @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
     // Inject the hashingProvider
-    private readonly hashingProvider: HashingService,
+    private readonly hashingProvider: HashingProvider,
     // Inject jwt service
     private readonly jwtService: JwtService,
     // Inject jwt configuration

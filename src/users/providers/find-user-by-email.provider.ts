@@ -2,10 +2,10 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../user.entity';
-import { databaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
 
 @Injectable()
-export class FindUserByEmailService {
+export class FindUserByEmailProvider {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,

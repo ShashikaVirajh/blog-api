@@ -7,7 +7,7 @@ import { MetaOption } from '../../meta-options/meta-option.entity';
 import { UsersService } from '../../users/providers/users.service';
 import { TagsService } from '../../tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
-import { databaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
 import { GetPostsDto } from '../dtos/get-post.dto';
 import { PaginationService } from '../../common/pagination/providers/pagination.service';
 import { PaginatedResponse } from '../../common/pagination/interfaces/paginated-response.interface';

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { MetaOption } from '../meta-option.entity';
 import { CreatePostMetaOptionsDto } from '../dtos/create-post-meta-options.dto';
-import { databaseTimeoutException } from '../../helpers/exceptions';
+import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
 
 @Injectable()
 export class MetaOptionsService {

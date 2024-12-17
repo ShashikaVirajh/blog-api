@@ -2,8 +2,8 @@ import { forwardRef, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './providers/auth.service';
 import { UsersModule } from '../users/users.module';
-import { HashingService } from './providers/hashing.service';
-import { BcryptService } from './providers/bcrypt.service';
+import { HashingProvider } from './providers/hashing.provider';
+import { BcryptProvider } from './providers/bcrypt.provider';
 import { SignInProvider } from './providers/sign-in.provider';
 import { ConfigModule } from '@nestjs/config';
 import { jwtConfig } from './config/jwt.config';
@@ -16,8 +16,8 @@ import { JwtModule } from '@nestjs/jwt';
     AuthService,
     // When having both abstract and implementation classes, do it as follows
     {
-      provide: HashingService,
-      useClass: BcryptService,
+      provide: HashingProvider,
+      useClass: BcryptProvider,
     },
     SignInProvider,
   ],
@@ -26,6 +26,6 @@ import { JwtModule } from '@nestjs/jwt';
     ConfigModule.forFeature(jwtConfig),
     JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
-  exports: [AuthService, HashingService],
+  exports: [AuthService, HashingProvider],
 })
 export class AuthModule {}

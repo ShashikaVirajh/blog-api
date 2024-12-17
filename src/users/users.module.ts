@@ -5,10 +5,10 @@ import { User } from './user.entity';
 import { profileConfig } from './config/profile.config';
 import { UsersService } from './providers/users.service';
 import { UsersController } from './users.controller';
-import { CreateManyUsersService } from './providers/create-many-users.service';
-import { CreateUserService } from './providers/create-user.service';
+import { CreateManyUsersProvider } from './providers/create-many-users.provider';
+import { CreateUserProvider } from './providers/create-user.provider';
 import { AuthModule } from '../auth/auth.module';
-import { FindUserByEmailService } from './providers/find-user-by-email.service';
+import { FindUserByEmailProvider } from './providers/find-user-by-email.provider';
 
 @Module({
   controllers: [UsersController],
@@ -19,9 +19,9 @@ import { FindUserByEmailService } from './providers/find-user-by-email.service';
   ],
   providers: [
     UsersService,
-    CreateManyUsersService,
-    CreateUserService,
-    FindUserByEmailService,
+    CreateManyUsersProvider,
+    CreateUserProvider,
+    FindUserByEmailProvider,
   ],
   exports: [UsersService],
 })
