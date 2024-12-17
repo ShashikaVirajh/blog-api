@@ -12,25 +12,26 @@ Content-Type: application/json
 
 POST http://localhost:3001/users/create-many
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwLCJlbWFpbCI6ImRlZXBmYXRob20yQGdtYWlsLmNvbSIsImlhdCI6MTczNDQyMTE2NiwiZXhwIjoxNzM0NDI0NzY2LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.MagJ1SiisV4cu-egx6zqg5dzJRBDuST1dswVa0EsBUM
 
 {
   "users": [
     {
       "firstName": "Sherlock",
       "lastName": "Holmes",
-      "email": "sherlockholmes@gmail.com",
+      "email": "sherlockholmdes@gmail.com",
       "password": "Password123#"
     },
     {
       "firstName": "Hercule",
       "lastName": "Poirot",
-      "email": "hercule@gmail.com",
+      "email": "hercudle@gmail.com",
       "password": "Pa$$word1"
     },
     {
       "firstName": "John",
       "lastName": "Watson",
-      "email": "john@gmail.com",
+      "email": "jodhn@gmail.com",
       "password": "Pa$$word1"
     }
   ]
