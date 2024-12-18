@@ -58,7 +58,7 @@ export class Tag {
   @UpdateDateColumn()
   updateDate: Date;
 
-  // Add this decorator and column enables soft delete
+  // Add this decorators and column enables soft delete
   @DeleteDateColumn()
   deletedAt: Date;
 }
