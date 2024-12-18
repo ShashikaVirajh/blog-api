@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { BadRequestException, Body, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { Repository } from 'typeorm';
 import { Post } from '../post.entity';
@@ -11,40 +11,25 @@ import { databaseTimeoutException } from '../../helpers/exceptions.helpers';
 import { GetPostsDto } from '../dtos/get-post.dto';
 import { PaginationService } from '../../common/pagination/providers/pagination.service';
 import { PaginatedResponse } from '../../common/pagination/interfaces/paginated-response.interface';
+import { ActiveUserData } from '../../auth/interfaces/active-user-data.interface';
+import { CreatePostProvider } from './create-post.provider';
 
 @Injectable()
 export class PostsService {
   constructor(
-    // Inject Tag service
     private readonly tagsService: TagsService,
-    // Inject User service
     private readonly userService: UsersService,
-    // Inject Pagination service
     private readonly paginationService: PaginationService,
-    // Inject Post repository
+    private readonly createPostProvider: CreatePostProvider,
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>,
-    // Inject MetaOption repository
     @InjectRepository(MetaOption)
     private readonly metaOptionsRepository: Repository<MetaOption>,
   ) {}
 
   // Create post
-  public async create(@Body() createPostDto: CreatePostDto) {
-    try {
-      const author = await this.userService.findOneById(createPostDto.authorId);
-      const tagIds = await this.tagsService.findMultiple(createPostDto.tags);
-
-      const newPost = this.postsRepository.create({
-        ...createPostDto,
-        author: author,
-        tags: tagIds,
-      });
-
-      return await this.postsRepository.save(newPost);
-    } catch (error) {
-      databaseTimeoutException();
-    }
+  public async create(createPostDto: CreatePostDto, user: ActiveUserData) {
+    return await this.createPostProvider.create(createPostDto, user);
   }
 
   public async update(patchPostDto: PatchPostDto) {

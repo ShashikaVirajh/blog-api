@@ -1,11 +1,11 @@
 POST http://localhost:3001/posts
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwLCJlbWFpbCI6ImRlZXBmYXRob20yQGdtYWlsLmNvbSIsImlhdCI6MTczNDUwNTkxMiwiZXhwIjoxNzM0NTA5NTEyLCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.2Vq-jYTT6MA8eOQHo31EoQI3NMeZZ1vJ8LsBCPevT9U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwLCJlbWFpbCI6ImRlZXBmYXRob20yQGdtYWlsLmNvbSIsImlhdCI6MTczNDUwODgwMSwiZXhwIjoxNzM0NTEyNDAxLCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.aFk-LMH28n4yQpQBulRCu5yoYayhCRfdICW1CcEgjuw
 
 {
-  "title": "What is Disparaue2?",
+  "title": "What is Disparaue2s?",
   "postType": "post",
-  "slug": "post-2011",
+  "slug": "post-2011ss",
   "status": "draft",
   "content": "test content",
   "schema": "{\"name\":\"John Doe\",\"age\":30,\"isStudent\":false,\"courses\":[\"Mathematics\",\"Physics\",\"Computer Science\"],\"address\":{\"street\":\"123 Main St\",\"city\":\"Anytown\",\"postalCode\":\"12345\"}}",
@@ -14,10 +14,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEwLCJlbWFpb
   "metaOptions": {
     "metaValue": "{\"sidebarEnabled\": true, \"footerActive\": true, \"notifications\": false}"
   },
-  "authorId": 1,
   "tags": [
-    6,
-    10,
-    15
+    2,
+    5,
+    6
   ]
 }
