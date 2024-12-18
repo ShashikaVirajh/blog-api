@@ -23,9 +23,11 @@ export const envSchema = z.object({
   JWT_TOKEN_ISSUER: z.string().nonempty('JWT_TOKEN_ISSUER is required'),
   JWT_ACCESS_TOKEN_TTL: z.preprocess(
     (ttl) => Number(ttl),
-    z
-      .number({ required_error: 'JWT_ACCESS_TOKEN_TTL is required' })
-      .default(3600),
+    z.number({ required_error: 'JWT_ACCESS_TOKEN_TTL is required' }),
+  ),
+  JWT_REFRESH_TOKEN_TTL: z.preprocess(
+    (ttl) => Number(ttl),
+    z.number({ required_error: 'JWT_REFRESH_TOKEN_TTL is required' }),
   ),
 
   /** PROFILE */
