@@ -1,7 +1,8 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { User } from '../user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+
+import { User } from '../user.entity';
 import { GoogleUser } from '../interfaces/google-user.inerface';
 
 @Injectable()
@@ -13,14 +14,15 @@ export class CreateGoogleUserProvider {
 
   public async createGoogleUser(googleUser: GoogleUser) {
     try {
-      const user = this.usersRepository.create({
+      const userToCreate = {
         firstName: googleUser.firstName,
         lastName: googleUser.lastName,
         googleId: googleUser.googleId,
         email: googleUser.email,
-      });
-      
-      return await this.usersRepository.save(user);
+      };
+
+      const newUser = this.usersRepository.create(userToCreate);
+      return await this.usersRepository.save(newUser);
     } catch (error) {
       throw new ConflictException(error, {
         description: 'Could not create a new user',
