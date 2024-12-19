@@ -7,5 +7,7 @@ export const jwtConfig = registerAs('jwt', () => {
     issuer: process.env.JWT_TOKEN_ISSUER,
     accessTokenTtl: parseInt(process.env.JWT_ACCESS_TOKEN_TTL),
     refreshTokenTtl: parseInt(process.env.JWT_REFRESH_TOKEN_TTL),
+    googleClientId: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
   };
 });

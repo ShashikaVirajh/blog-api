@@ -17,6 +17,9 @@ export const envSchema = z.object({
   DATABASE_SYNC: z.string().nonempty('DATABASE_SYNC is required'),
   DATABASE_AUTOLOAD: z.string().nonempty('DATABASE_AUTOLOAD is required'),
 
+  /** PROFILE */
+  PROFILE_API_KEY: z.string().nonempty('PROFILE_API_KEY is required'),
+
   /** JWT */
   JWT_SECRET: z.string().nonempty('JWT_SECRET is required'),
   JWT_TOKEN_AUDIENCE: z.string().nonempty('JWT_TOKEN_AUDIENCE is required'),
@@ -30,10 +33,13 @@ export const envSchema = z.object({
     z.number({ required_error: 'JWT_REFRESH_TOKEN_TTL is required' }),
   ),
 
-  /** PROFILE */
-  PROFILE_API_KEY: z.string().nonempty('PROFILE_API_KEY is required'),
+  /** GOOGLE */
+  GOOGLE_CLIENT_ID: z.string().nonempty('GOOGLE_CLIENT_ID is required'),
+  GOOGLE_CLIENT_SECRET: z.string().nonempty('GOOGLE_CLIENT_SECRET is required'),
 });
 
-/** -- NOTE --
- * preprocess => Transform the value before validating
+/**           ZOD VALIDATION NOTE
+ *
+ * preprocess   => Transform the value before validating
+ * nativeEnum   => Set a custom enum as the type
  **/
