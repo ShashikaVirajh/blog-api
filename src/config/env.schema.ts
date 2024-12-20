@@ -2,8 +2,9 @@ import { z } from 'zod';
 import { Environment } from './environment.enum';
 
 export const envSchema = z.object({
-  /** SYSTEM */
+  /** APP */
   NODE_ENV: z.nativeEnum(Environment).default(Environment.DEVELOPMENT),
+  API_VERSION: z.string().nonempty('API_VERSION is required'),
 
   /** DATABASE */
   DATABASE_PORT: z.preprocess(

@@ -16,9 +16,10 @@ import { envSchema } from './config/env.schema';
 import { PaginationModule } from './common/pagination/pagination.module';
 import { jwtConfig } from './auth/config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthenticationGuard } from './auth/guards/authentication.guard';
 import { AccessTokenGuard } from './auth/guards/access-token.guard';
+import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
 
 // Get the current NODE_ENV
 const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
@@ -31,6 +32,10 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
     {
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: DataResponseInterceptor,
     },
   ],
   imports: [

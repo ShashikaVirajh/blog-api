@@ -37,7 +37,8 @@ export class PostsController {
   })
   @ApiResponse({
     status: 201,
-    description: 'You get a 201 response if your post is created successfully',
+    description:
+      'You get a 201 data-response if your post is created successfully',
   })
   @Post()
   public createPost(
@@ -53,7 +54,7 @@ export class PostsController {
   })
   @ApiResponse({
     status: 200,
-    description: 'A 200 response if the post is updated successfully',
+    description: 'A 200 data-response if the post is updated successfully',
   })
   @Patch()
   public updatePost(@Body() patchPostDto: PatchPostDto) {
