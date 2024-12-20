@@ -20,6 +20,7 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthenticationGuard } from './auth/guards/authentication.guard';
 import { AccessTokenGuard } from './auth/guards/access-token.guard';
 import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
+import { UploadsModule } from './uploads/uploads.module';
 
 // Get the current NODE_ENV
 const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
@@ -76,6 +77,8 @@ const CURRENT_ENVIRONMENT = process.env.NODE_ENV;
         };
       },
     }),
+
+    UploadsModule,
   ],
 })
 export class AppModule {}

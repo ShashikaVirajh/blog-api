@@ -37,6 +37,17 @@ export const envSchema = z.object({
   /** GOOGLE */
   GOOGLE_CLIENT_ID: z.string().nonempty('GOOGLE_CLIENT_ID is required'),
   GOOGLE_CLIENT_SECRET: z.string().nonempty('GOOGLE_CLIENT_SECRET is required'),
+
+  /** AWS S3 BUCKET */
+  AWS_PUBLIC_BUCKET_NAME: z
+    .string()
+    .nonempty('AWS_PUBLIC_BUCKET_NAME is required'),
+  AWS_REGION: z.string().nonempty('AWS_REGION is required'),
+  AWS_CLOUDFRONT_URL: z.string().nonempty('AWS_CLOUDFRONT_URL is required'),
+  AWS_ACCESS_KEY_ID: z.string().nonempty('AWS_ACCESS_KEY_ID is required'),
+  AWS_SECRET_ACCESS_KEY: z
+    .string()
+    .nonempty('AWS_SECRET_ACCESS_KEY is required'),
 });
 
 /**           ZOD VALIDATION NOTE
