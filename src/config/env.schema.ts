@@ -48,10 +48,16 @@ export const envSchema = z.object({
   AWS_SECRET_ACCESS_KEY: z
     .string()
     .nonempty('AWS_SECRET_ACCESS_KEY is required'),
+
+  /** MAIL TRAP */
+  MAIL_HOST: z.string().nonempty('MAIL_HOST is required'),
+  SMTP_USER_NAME: z.string().nonempty('SMTP_USER_NAME is required'),
+  SMTP_PASSWORD: z.string().nonempty('SMTP_PASSWORD is required'),
 });
 
-/**           ZOD VALIDATION NOTE
+/** ----------------------------------------------------------------------------
+ *              ZOD VALIDATION NOTE
  *
  * preprocess   => Transform the value before validating
  * nativeEnum   => Set a custom enum as the type
- **/
+ --------------------------------------------------------------------------- **/

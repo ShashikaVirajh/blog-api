@@ -10,14 +10,14 @@ import { Repository } from 'typeorm';
 import { User } from '../user.entity';
 import { HashingProvider } from '../../auth/providers/hashing.provider';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MailService } from '../../mail/providers/mail.service';
 
 @Injectable()
 export class CreateUserProvider {
   constructor(
-    // Inject user repository
+    private readonly mailService: MailService,
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-    // Inject hashing service
     @Inject(forwardRef(() => HashingProvider))
     private readonly hashingService: HashingProvider,
   ) {}
@@ -41,8 +41,12 @@ export class CreateUserProvider {
         password: hashedPassword,
       });
 
+      await this.mailService.sendUserWelcome(newUser);
+
       return await this.usersRepository.save(newUser);
     } catch (error) {
+      console.log(error);
+
       if (error instanceof BadRequestException) {
         throw error;
       }
